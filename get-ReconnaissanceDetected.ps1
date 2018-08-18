@@ -59,5 +59,4 @@ else {
     }
     Write-Output "Report saved as $filename"
 }
-
 $DSMSoapService.endSession($SID)
