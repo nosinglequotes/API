@@ -1,3 +1,3 @@
-# api
+# Collection of API tools to help manage Deep Security
 
-SOAP or REST API scripts to use on Deep Security Manager
+Single quotes are the best! 
