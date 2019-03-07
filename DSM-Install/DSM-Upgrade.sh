@@ -8,19 +8,33 @@ logFile="dsm-Upgrade.log"
 logFileLocation="$workingDir/$logFile"
 
 #Working Directory/Logging setup
-mkdir $workingDir
-touch $workingDir$logFile
+if [ -e $workingDir ]
+then
+	echo "Working Directory already exists"
+else
+	mkdir $workingDir
+	echo "Working directory created"
+fi
+
+if [ -e $logFileLocation ]
+then
+	echo "Log file already exists"
+else
+       touch $logFileLocation
+       echo "Log file created"
+fi
+
 
 echo "$(date) - DSM upgrade script started" | tee -a $logFileLocation
 echo "$(date) - Manager installer downloaded to working directory"  | tee -a $logFileLocation
 curl -o $workingDir/manager.sh https://files.trendmicro.com/products/deepsecurity/en/$dsmMajorVersion/Manager-Linux-$dsmVersion.x64.sh
 
 echo "$(date) - DSM installer permissions set"  | tee -a $logFileLocation
-chmod +x $workingDir/manager.sh
+chmod +x $workingDir/manager-$dsmVersion.sh
 
 echo "$(date) - DSM upgrade started"  | tee -a $logFileLocation
 
-$workingDir/manager.sh -q -console
+$workingDir/manager-$dsmVersion.sh -q -console
 
 echo "$(date) - DSM upgrade script completed" | tee -a $logFileLocation
 
