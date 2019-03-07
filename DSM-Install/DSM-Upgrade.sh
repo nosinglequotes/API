@@ -26,15 +26,21 @@ fi
 
 
 echo "$(date) - DSM upgrade script started" | tee -a $logFileLocation
-echo "$(date) - Manager installer downloaded to working directory"  | tee -a $logFileLocation
-curl -o $workingDir/manager.sh https://files.trendmicro.com/products/deepsecurity/en/$dsmMajorVersion/Manager-Linux-$dsmVersion.x64.sh
 
-echo "$(date) - DSM installer permissions set"  | tee -a $logFileLocation
-chmod +x $workingDir/manager-$dsmVersion.sh
-
-echo "$(date) - DSM upgrade started"  | tee -a $logFileLocation
-
-$workingDir/manager-$dsmVersion.sh -q -console
+if [ -e $workingDir/manager-$dsmVersion.sh ]
+then
+	echo "DSM installer has already been downloaded.  Skipping download"
+	echo "$(date) - DSM installer permissions set"  | tee -a $logFileLocation
+	chmod +x $workingDir/manager-$dsmVersion.sh
+	echo "$(date) - DSM upgrade started"  | tee -a $logFileLocation
+	$workingDir/manager-$dsmVersion.sh -q -console
+else
+	echo "$(date) - Manager installer downloaded to working directory"  | tee -a $logFileLocation
+	curl -o $workingDir/manager.sh https://files.trendmicro.com/products/deepsecurity/en/$dsmMajorVersion/Manager-Linux-$dsmVersion.x64.sh
+	chmod +x $workingDir/manager-$dsmVersion.sh
+	echo "$(date) - DSM upgrade started"  | tee -a $logFileLocation
+	$workingDir/manager-$dsmVersion.sh -q -console
+fi
 
 echo "$(date) - DSM upgrade script completed" | tee -a $logFileLocation
 
