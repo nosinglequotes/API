@@ -36,7 +36,7 @@ then
 	$workingDir/manager-$dsmVersion.sh -q -console
 else
 	echo "$(date) - Manager installer downloaded to working directory"  | tee -a $logFileLocation
-	curl -o $workingDir/manager.sh https://files.trendmicro.com/products/deepsecurity/en/$dsmMajorVersion/Manager-Linux-$dsmVersion.x64.sh
+	curl -o $workingDir/manager-$dsmVersion.sh https://files.trendmicro.com/products/deepsecurity/en/$dsmMajorVersion/Manager-Linux-$dsmVersion.x64.sh
 	chmod +x $workingDir/manager-$dsmVersion.sh
 	echo "$(date) - DSM upgrade started"  | tee -a $logFileLocation
 	$workingDir/manager-$dsmVersion.sh -q -console
