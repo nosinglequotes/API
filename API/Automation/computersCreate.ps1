@@ -1,11 +1,12 @@
+param (
+  [Parameter(Mandatory=$true, HelpMessage="FQDN and port for Deep Security Manager; ex dsm.example.com:443--")][string]$manager,
+  [Parameter(Mandatory=$true, HelpMessage="DeepSecurity Manager API Key")][string]$apikey
+)
+
 [System.Net.ServicePointManager]::ServerCertificateValidationCallback={$true}
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-$manager = "app.deepsecurity.trendmicro.com"
 $endPoint = "computers"
-
-$apikey = "YOUR_API_KEY"
-
 
 $url = "https://$manager/api/$endPoint"
 
@@ -30,6 +31,5 @@ $hash = @{
 
 }
 $params = $hash | convertto-json
-
 
 Invoke-WebRequest -Uri $url -Method Post -ContentType "application/json" -Headers $headers -Body $params
