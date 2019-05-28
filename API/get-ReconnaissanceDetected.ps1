@@ -49,7 +49,7 @@ else {
         if ($evt.eventID -eq 851) {
             $idft.id = $evt.systemEventID
             $fullevents = $DSM.systemEventRetrieve2($tft, $hft, $idft, $false, $SID)
-            $regex = '\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b|\b\d{1,2}\/\d{1,2}\/\d{4}\b'
+            $regex = "\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b|\b\d{1,2}\/\d{1,2}\/\d{4}\b"
             $eventDescrion =$fullevents.systemEvents[0].description
             $trafficFromIP = Select-String -InputObject $eventDescrion -Pattern $regex | % { $_.Matches } | % { $_.Value } 
             $report = @()
