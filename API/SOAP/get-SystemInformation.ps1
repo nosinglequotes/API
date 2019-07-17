@@ -29,7 +29,7 @@ catch {
 
 $systemInformation = $DSM.systemInformationRetrieve($SID)
 
-Write-Host $systemInformation
+Write-Host $systemInformation.key
 
 
 # Log out
