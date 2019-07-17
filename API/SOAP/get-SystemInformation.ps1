@@ -29,6 +29,7 @@ catch {
 
 $systemInformation = $DSM.systemInformationRetrieve($SID)
 
+<#
 #Write-Host $systemInformation.key
 Write-host "Loop Started"
 foreach ($i in $systemInformation.key) {
@@ -36,6 +37,10 @@ foreach ($i in $systemInformation.key) {
 	$response | Export-Csv -Path systemInformation.csv -Append -NoTypeInformation
 }
 Write-host "Loop Finished"
+#>
+
+$response = $systemInformation | Select-Object key, name, value
+$response | Export-Csv -Path systemInformation.csv -Append -NoTypeInformation
 
 # Log out
 $DSM.endSession($SID)
