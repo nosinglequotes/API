@@ -31,6 +31,12 @@ $systemInformation = $DSM.systemInformationRetrieve($SID)
 
 Write-Host $systemInformation.key
 
+foreach ($i in $systemInformation.key) {
+	$response = $systemInformation | Select-Object key, name, value
+	$response | Export-Csv -Path systemInformation.csv -Append -NoTypeInformation
+
+}
+
 
 # Log out
 $DSM.endSession($SID)
