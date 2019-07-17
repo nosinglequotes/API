@@ -5,7 +5,7 @@ param (
 )
 
 # Variables
-$date = Get-Date -UFormat "%m_%d_%Y"
+$date = Get-Date -UFormat "%m_%d_%Y_%R"
 $file = ".\systemInformation_$date.csv"
 
 ##################### Authentication Block Start #####################
