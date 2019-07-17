@@ -5,7 +5,7 @@ param (
 )
 
 # Variables
-$date = Get-Date -UFormat "%m_%d_%Y_%R"
+$date = Get-Date -UFormat "%m_%d_%Y_%R" | ForEach-Object { $_ -replace ":", "." }
 $file = ".\systemInformation_$date.csv"
 
 ##################### Authentication Block Start #####################
